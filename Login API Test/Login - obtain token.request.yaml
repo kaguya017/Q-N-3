@@ -1,0 +1,22 @@
+$kind: http-request
+url: "{{base_url}}/login"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: '{"username": "{{username}}", "password": "{{password}}"}'
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Status code is 200', function () {
+        pm.response.to.have.status(200);
+      });
+      var json = pm.response.json();
+      pm.test('Token exists', function () {
+        pm.expect(json).to.have.property('token');
+      });
+      // Save token to env
+      pm.environment.set('auth_token', json.token);
+    language: text/javascript
+order: 1000

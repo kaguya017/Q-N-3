@@ -1,0 +1,10 @@
+name: GameQA_ENV
+values:
+  - key: base_url
+    value: 'http://localhost:3000'
+  - key: username
+    value: testuser
+  - key: password
+    value: secret123
+  - key: auth_token
+    value: demo-token-123
